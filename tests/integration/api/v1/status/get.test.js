@@ -22,5 +22,5 @@ describe("GET /api/v1/migrations", () => {
 
       expect(responseBody.in_use_connections).toBe(1);
     });
-  })
-})
+  });
+});
