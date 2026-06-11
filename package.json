@@ -19,7 +19,8 @@
     "wait-for-postgres": "node infra/scripts/wait-for-postgres.js",
     "prepare": "husky",
     "commit": "cz",
-    "git": "GIT_SSH_COMMAND='ssh -F /dev/null -i ~/.ssh/id_ed25519_lx9qv_personal -o IdentitiesOnly=yes -o IdentityAgent=none' git"
+    "git": "GIT_SSH_COMMAND='ssh -F /dev/null -i ~/.ssh/id_ed25519_lx9qv_personal -o IdentitiesOnly=yes -o IdentityAgent=none' git",
+    "important": "unset GIT_SSH_COMMAND && export GIT_SSH_COMMAND='ssh -F /dev/null -i ~/.ssh/id_ed25519_lx9qv_personal -o IdentitiesOnly=yes -o IdentityAgent=none'"
   },
   "author": "",
   "license": "MIT",
