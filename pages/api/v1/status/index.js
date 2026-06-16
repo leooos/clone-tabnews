@@ -1,4 +1,4 @@
-import { InternalServerError } from "infra/errors"
+import { InternalServerError } from "infra/errors";
 import database from "/infra/database.js";
 
 async function status(request, response) {
@@ -32,12 +32,12 @@ async function status(request, response) {
       },
       max_connections: databaseMaxConnectionsValue,
       in_use_connections: databaseOpenedConnectionsValue,
-  });
-  } catch (error) {  
-    const publicErrorObject = new InternalServerError({
-      cause: error
     });
-    response.status(500).json(publicErrorObject)
+  } catch (error) {
+    const publicErrorObject = new InternalServerError({
+      cause: error,
+    });
+    response.status(500).json(publicErrorObject);
   }
 }
 

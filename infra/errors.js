@@ -1,10 +1,10 @@
 export class InternalServerError extends Error {
   constructor({ cause }) {
     super("Houston we have a problem.", {
-      cause
+      cause,
     });
     this.name = "InternalServerError";
-    this.action = "Entre em contato com o suporte."
+    this.action = "Entre em contato com o suporte.";
     this.statusCode = 500;
   }
 
@@ -13,7 +13,7 @@ export class InternalServerError extends Error {
       name: this.name,
       message: this.message,
       action: this.action,
-      status_code: this.statusCode
-    }
+      status_code: this.statusCode,
+    };
   }
 }
