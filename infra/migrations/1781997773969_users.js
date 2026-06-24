@@ -3,9 +3,9 @@ exports.up = (pgm) => {
     id: {
       type: "uuid",
       primaryKey: true,
-      default: pgm.func("gen_random_uuid()")
+      default: pgm.func("gen_random_uuid()"),
     },
-    
+
     // for reference Github limits username to 39 chars
     username: {
       type: "varchar(30)",
@@ -39,4 +39,4 @@ exports.up = (pgm) => {
   })
 };
 
-exports.down = false
+exports.down = false;
