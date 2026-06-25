@@ -86,8 +86,8 @@ describe("POST /api/v1/users", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: "userduplicado",
-          email: "email@curso.dev",
+          username: "usernameduplicado",
+          email: "emaail@curso.dev",
           password: "senha123",
         }),
       });
@@ -100,8 +100,8 @@ describe("POST /api/v1/users", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: "userduplicado",
-          email: "outroemail@curso.dev",
+          username: "usernameduplicado",
+          email: "emailduplicado2@curso.dev",
           password: "senha123",
         }),
       });

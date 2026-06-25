@@ -1,14 +1,14 @@
 import database from "infra/database";
-import { ValidationError } from "infra/errors";
+import { ValidationError, NotFoundError } from "infra/errors";
 
 async function create(userInputValues) {
-  await validareUniqueEmail(userInputValues.email);
-  await validareUniqueUsername(userInputValues.username);
+  await validateUniqueEmail(userInputValues.email);
+  await validateUniqueUsername(userInputValues.username);
 
   const newUser = await runInsertQuery(userInputValues);
   return newUser;
 
-  async function validareUniqueEmail(email) {
+  async function validateUniqueEmail(email) {
     const results = await database.query({
       text: `
         SELECT
@@ -28,7 +28,7 @@ async function create(userInputValues) {
     }
   }
 
-  async function validareUniqueUsername(username) {
+  async function validateUniqueUsername(username) {
     const results = await database.query({
       text: `
         SELECT
@@ -68,8 +68,41 @@ async function create(userInputValues) {
   }
 }
 
+async function findOneByUsername(username) {
+  console.log("findOneByUsername called with username:", username);
+  const userFound = await runSelectQuery(username);
+
+  return userFound;
+
+  async function runSelectQuery(username) {
+    const results = await database.query({
+      text: `
+        SELECT
+          *
+        FROM
+          users
+        WHERE
+          LOWER(username) = LOWER($1)
+        LIMIT 
+          1
+        ;`,
+      values: [username],
+    });
+    if (results.rowCount === 0) {
+      console.log("No user found with username:", username);
+      throw new NotFoundError({
+        message: "The username provided is not found.",
+        action: "Use a different username.",
+      });
+    }
+
+    return results.rows[0];
+  }
+}
+
 const user = {
   create,
+  findOneByUsername,
 };
 
 export default user;
