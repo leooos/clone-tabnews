@@ -30,7 +30,7 @@ describe("POST /api/v1/users", () => {
         id: responseBody.id,
         username: "leoooos",
         email: "contato@curso.dev",
-        password: "senha123",
+        password: responseBody.password,
         createdAt: responseBody.createdAt,
         updatedAt: responseBody.updatedAt,
       });
