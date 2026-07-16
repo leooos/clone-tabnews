@@ -12,7 +12,6 @@ async function compare(providedPassword, hashedPassword) {
 }
 
 function getNumberOfSaltRounds() {
-  console.log("NODE_ENV", process.env.NODE_ENV);
   return process.env.NODE_ENV === "production" ? 14 : 4;
 }
 

@@ -46,9 +46,9 @@ describe("GET /api/v1/users/[username]", () => {
 
     test("With case mismatch", async () => {
       await orchestrator.createUser({
-       username: "differentcase",
-          email: "different@curso.dev",
-          password: "senha123",
+        username: "differentcase",
+        email: "different@curso.dev",
+        password: "senha123",
       });
 
       const response2 = await fetch(
