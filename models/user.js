@@ -1,6 +1,6 @@
+import { ValidationError, NotFoundError } from "infra/errors";
 import database from "infra/database";
 import password from "models/password";
-import { ValidationError, NotFoundError } from "infra/errors";
 
 async function findOneByUsername(username) {
   const userFound = await runSelectQuery(username);
@@ -25,6 +25,35 @@ async function findOneByUsername(username) {
       throw new NotFoundError({
         message: "The username provided is not found.",
         action: "Use a different username.",
+      });
+    }
+
+    return results.rows[0];
+  }
+}
+
+async function findOneByEmail(email) {
+  const userFound = await runSelectQuery(email);
+  return userFound;
+
+  async function runSelectQuery(email) {
+    const results = await database.query({
+      text: `
+        SELECT
+          *
+        FROM
+          users
+        WHERE
+          LOWER(email) = LOWER($1)
+        LIMIT 
+          1
+        ;`,
+      values: [email],
+    });
+    if (results.rowCount === 0) {
+      throw new NotFoundError({
+        message: "The email provided is not found.",
+        action: "Use a different email.",
       });
     }
 
@@ -149,6 +178,7 @@ async function _hashPassword(userInputValues) {
 }
 
 const user = {
+  findOneByEmail,
   findOneByUsername,
   create,
   update,
