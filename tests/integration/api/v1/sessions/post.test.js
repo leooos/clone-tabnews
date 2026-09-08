@@ -37,7 +37,7 @@ describe("POST /api/v1/sessions", () => {
       });
       expect(response.status).toBe(401);
     });
-    test("with correct `email` and correct `password`", async () => {
+    test("with correct `email` and incorrect `password`", async () => {
       await orchestrator.createUser({
         email: "correct@example.com",
       });
